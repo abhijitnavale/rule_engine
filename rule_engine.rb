@@ -1,9 +1,7 @@
 #!/usr/bin/ruby
 
-require_relative 'engine'
+require_relative 'lib/engine'
 
 eng = Engine.new
 
-eng.hello()
-eng.connect_redis()
 eng.read_data_stream()
