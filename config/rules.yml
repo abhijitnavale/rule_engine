@@ -1,0 +1,24 @@
+---
+# Example Rules
+ATL1:
+  Integer:
+    rule: value <= 240
+    # rule: value >= 100
+    # rule: value = 100
+    # rule: value > 100
+    # rule: value < 100
+    # rule: value != 100
+ATL2:
+  String:
+    rule: value != LOW
+    # rule: value == HIGH
+    # rule: value != 124
+ATL3:
+  Datetime:
+    rule: in future
+    # rule: not in future
+    # rule: between d1 d2
+    # rule: before d1
+    # rule: after d3
+  Integer:
+    rule: value > 0
