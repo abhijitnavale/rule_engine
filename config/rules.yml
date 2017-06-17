@@ -3,7 +3,7 @@ ATL1:
   Integer:
     rule: value <= 240
     # rule: value >= 100
-    # rule: value = 100
+    # rule: value == 100
     # rule: value > 100
     # rule: value < 100
     # rule: value != 100

@@ -22,8 +22,8 @@ SIGNAL:
 ```    
 
 ## Rule Syntax
-* Integer: **"rule: value op number"** where 'value' is keyword, 'op' is operator for integer operation and "number" is any integer or floating number
-* String: **"rule: value op str"**, where 'value' is keyword, 'op' is string operator and "str" is a String to be compared with.
+* Integer: **"rule: value op number"** where 'value' is keyword, 'op' is operator for integer comparison(>, <, <=, >=, ==) and "number" is any integer or floating number
+* String: **"rule: value op str"**, where 'value' is keyword, 'op' is string comparison operator(==, !=) and "str" is a String to be compared with.
 * DateTime: **"between YYYY-MM-DD YYYY-MM-DD"**, where 'between' is keyword, and remaining both are dates in format YYYY-MM-DD.
 * Use underscore '_' (without quotes) to denote negation for DateTime Type.
 Example: _future means Date Not in Future.
@@ -57,7 +57,7 @@ ATL1:
     # rule: value != 124 (value should **NOT** be equal to string '124')
 ```
 
-### Multiple DATA TYPE rules for same signal ATL3:
+### MULTIPLE data type rules for same signal ATL3:
 ```
 ATL3:
   Datetime:
