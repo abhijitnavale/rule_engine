@@ -6,18 +6,16 @@
 * ./rule_engine
 
 ## Input Data Json
-Input Data json is stored as raw_data.json inside "data" directory
+Input Data json is stored as **raw_data.json** inside "data" directory
 
 ## Rule Configuration
-Rules are written in "config/rules.yml" File using YAML syntax.
+Rules are written in **"config/rules.yml"** File using YAML syntax.
 
 General Syntax:
 
-SIGNAL:
-
-  DATA_TYPE:
-  
-    rule: <expression>
+> SIGNAL:
+>   DATA_TYPE:
+>     rule: <expression>
 
 ## Rule Syntax
 * Use underscore '_' (without quotes) to denote negation for DateTime Type.
