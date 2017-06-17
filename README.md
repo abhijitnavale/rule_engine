@@ -13,11 +13,14 @@ Rules are written in **"config/rules.yml"** File using YAML syntax.
 
 General Syntax:
 
-> SIGNAL:
->   DATA_TYPE:
->     rule: <expression>
+SIGNAL:
+&nbsp;&nbsp;DATA_TYPE:
+&nbsp;&nbsp;&nbsp;&nbsp;rule: <expression>
 
 ## Rule Syntax
+* Integer: **"rule: value op <number>"** where 'value' is keyword, 'op' is operator for integer operation and <number> is any integer or floating number
+* String: **"rule: value op <str>"**, where 'value' is keyword, 'op' is string operator and <str> is String to be compared with.
+* DateTime: **"between YYYY-MM-DD YYYY-MM-DD"**, where 'between' is keyword, and remaining both are dates in format YYYY-MM-DD.
 * Use underscore '_' (without quotes) to denote negation for DateTime Type.
 * Use exclamation '!' (without quotes) to denote negation for Integer and String Types.
 
