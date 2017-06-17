@@ -38,9 +38,9 @@ Rule Explanation in front of it in round bracket.
 ```
 ATL1:
   Integer:
-    rule: value <= 240 (value should be less than 240)
-    # rule: value >= 100 (value should be greater than 1000)
-    # rule: value = 100 (value should be equal to 100)
+    rule: value <= 240 (value should be less than equal to 240)
+    # rule: value >= 100 (value should be greater than equal to 100)
+    # rule: value == 100 (value should be equal to 100)
     # rule: value > 100 (value shold be greater than 100)
     # rule: value < 100 (value should be less than 100)
     # rule: value != 100 (value should **NOT** be equal to 100)
