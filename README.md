@@ -10,7 +10,7 @@ Input Data json is stored as **raw_data.json** inside "data" directory
 
 ## Rule Configuration
 Rules are written in **"config/rules.yml"** File using YAML syntax.
-
+<u>Note the use of **spaces** for netsing.</u>
 General Syntax:
 
 SIGNAL:<br>
