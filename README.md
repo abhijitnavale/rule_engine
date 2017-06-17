@@ -13,8 +13,8 @@ Rules are written in **"config/rules.yml"** File using YAML syntax.
 
 General Syntax:
 
-SIGNAL:
-&nbsp;&nbsp;DATA_TYPE:
+SIGNAL:<br>
+&nbsp;&nbsp;DATA_TYPE:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;rule: <expression>
 
 ## Rule Syntax
