@@ -9,18 +9,18 @@ class Engine
   STRING_TYPE = 'String'.freeze
   DATETIME_TYPE = 'Datetime'.freeze
 
-  DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
-  DATE_FORMAT = '%Y-%m-%d'
+  DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'.freeze
+  DATE_FORMAT = '%Y-%m-%d'.freeze
 
-  DATE_IN_FUTURE = 'future'
-  DATE_NOT_IN_FUTURE = '_future'
-  DATE_IN_PAST = 'past'
-  DATE_NOT_IN_PAST = '_past'
-  DATE_TODAY = 'today'
-  DATE_BETWEEN_RANGE = 'between'
-  DATE_NOT_BETWEEN_RANGE = '_between'
-  DATE_BEFORE = 'before'
-  DATE_AFTER = 'after'
+  DATE_IN_FUTURE = 'future'.freeze
+  DATE_NOT_IN_FUTURE = '_future'.freeze
+  DATE_IN_PAST = 'past'.freeze
+  DATE_NOT_IN_PAST = '_past'.freeze
+  DATE_TODAY = 'today'.freeze
+  DATE_BETWEEN_RANGE = 'between'.freeze
+  DATE_NOT_BETWEEN_RANGE = '_between'.freeze
+  DATE_BEFORE = 'before'.freeze
+  DATE_AFTER = 'after'.freeze
 
   def initialize
   end
@@ -141,7 +141,7 @@ class Engine
     @rule = @rules[@key][data_type]
     @value = input_signal['value']
 
-    if data_type == DATETIME_TYPE
+    if (data_type == DATETIME_TYPE)
       @op = @rule['rule'].split(" ")[0]
 
       if (@op == DATE_BETWEEN_RANGE) || (@op == DATE_NOT_BETWEEN_RANGE)
