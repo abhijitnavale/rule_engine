@@ -81,24 +81,27 @@ class Engine
   end
 
   def apply_integer_rule(input_signal)
+    source_name = input_signal['signal']
     set_common_values(input_signal, INTEGER_TYPE)
 
     # execute the mathematical operation
     success = @value.to_f.send(@op, @ref_value.to_f)
 
-    puts "FAILED: #{input_signal}" if not success
+    puts "FAILED: #{source_name}" if not success
   end
 
   def apply_string_rule(input_signal)
+    source_name = input_signal['signal']
     set_common_values(input_signal, STRING_TYPE)
 
     # execute the string operation
     success = @value.send(@op, @ref_value)
 
-    puts "FAILED: #{input_signal}" if not success
+    puts "FAILED: #{source_name}" if not success
   end
 
   def apply_date_rule(input_signal)
+    source_name = input_signal['signal']
     set_common_values(input_signal, DATETIME_TYPE)
     datetime = DateTime.now # Todays Date and Current Time
     signal_date = DateTime.strptime(@value, DATETIME_FORMAT)
@@ -133,7 +136,7 @@ class Engine
       success = false
     end
 
-    puts "FAILED: #{input_signal}" if not success
+    puts "FAILED: #{source_name}" if not success
   end
 
   def set_common_values(input_signal, data_type)
