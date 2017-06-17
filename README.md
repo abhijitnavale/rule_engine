@@ -15,9 +15,11 @@ Rules are written in **"config/rules.yml"** File using YAML syntax.
 
 General Syntax:
 
-SIGNAL:<br>
-&nbsp;&nbsp;DATA_TYPE:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;rule: <expression>
+```
+SIGNAL:
+  DATA_TYPE:
+    rule: <expression>
+```    
 
 ## Rule Syntax
 * Integer: **"rule: value op number"** where 'value' is keyword, 'op' is operator for integer operation and "number" is any integer or floating number
