@@ -1,17 +1,27 @@
 require 'json'
 require 'yaml'
-require 'date'
-  
+
 class Engine
   RAW_DATA_FILE = 'data/raw_data.json'.freeze
   RULES_FILE = 'config/rules.yml'.freeze
-  
+
   INTEGER_TYPE = 'Integer'.freeze
   STRING_TYPE = 'String'.freeze
   DATETIME_TYPE = 'Datetime'.freeze
 
   DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
-  
+  DATE_FORMAT = '%Y-%m-%d'
+
+  DATE_IN_FUTURE = 'future'
+  DATE_NOT_IN_FUTURE = '_future'
+  DATE_IN_PAST = 'past'
+  DATE_NOT_IN_PAST = '_past'
+  DATE_TODAY = 'today'
+  DATE_BETWEEN_RANGE = 'between'
+  DATE_NOT_BETWEEN_RANGE = '_between'
+  DATE_BEFORE = 'before'
+  DATE_AFTER = 'after'
+
   def initialize
   end
 
@@ -24,7 +34,7 @@ class Engine
     @rules = YAML.load_file(RULES_FILE)
 
     # create list of signals who has rules set for them
-    @rule_set = []    
+    @rule_set = []
     @rules.keys.each do |r|
       @rule_set.push(r)
     end
@@ -62,7 +72,7 @@ class Engine
 
   def rule_exists(signal, input_type)
     sub_hash = @rules["#{signal}"]
-    
+
     if (@rules.key?(signal) && sub_hash.key?(input_type))
       return true
     else
@@ -89,25 +99,41 @@ class Engine
   end
 
   def apply_date_rule(input_signal)
-    puts '########################'
-    puts input_signal
     set_common_values(input_signal, DATETIME_TYPE)
-    puts @key
-    puts @rule
-    puts @value
-    puts @op
-    puts @ref_value
-    puts "Operation: #{@value} #{@op} #{@ref_value}"
-    if @op == 'in future'
-      t = DateTime.strptime(@value, DATETIME_FORMAT)
-      puts t.to_date.inspect
-      t.to_date.future?
-    end
-    # result = value.to_f.send(op, ref_value.to_f)
-    # puts "RESULT #{result}"
+    datetime = DateTime.now # Todays Date and Current Time
+    signal_date = DateTime.strptime(@value, DATETIME_FORMAT)
 
-    # puts "FAILED: #{input_signal}" if not result
-    puts '========================='
+    case @op # apply respective date logic
+    when DATE_TODAY
+      success = signal_date == datetime
+    when DATE_IN_FUTURE
+      success = signal_date > datetime
+    when DATE_NOT_IN_FUTURE
+      success = datetime >= signal_date
+    when DATE_IN_PAST
+      success = signal_date < datetime
+    when DATE_NOT_IN_PAST
+      success = (signal_date >= datetime)
+    when DATE_BETWEEN_RANGE
+      start_date = Date.strptime(@start_date, DATE_FORMAT)
+      end_date = Date.strptime(@end_date, DATE_FORMAT)
+      success = (signal_date > start_date) && (signal_date < end_date)
+    when DATE_NOT_BETWEEN_RANGE
+      start_date = Date.strptime(@start_date, DATE_FORMAT)
+      end_date = Date.strptime(@end_date, DATE_FORMAT)
+      success = (signal_date < start_date) && (signal_date > end_date)\
+    when DATE_BEFORE
+      ref_date = Date.strptime(@ref_date, DATE_FORMAT)
+      success = (signal_date < ref_date)
+    when DATE_AFTER
+      ref_date = Date.strptime(@ref_date, DATE_FORMAT)
+      success = (signal_date > ref_date)
+    else
+      puts "ERROR! WRONG RULE."
+      success = false
+    end
+
+    puts "FAILED: #{input_signal}" if not success
   end
 
   def set_common_values(input_signal, data_type)
@@ -116,11 +142,17 @@ class Engine
     @value = input_signal['value']
 
     if data_type == DATETIME_TYPE
-      @op = @rule['rule']
+      @op = @rule['rule'].split(" ")[0]
+
+      if (@op == DATE_BETWEEN_RANGE) || (@op == DATE_NOT_BETWEEN_RANGE)
+        @start_date = @rule['rule'].split(" ")[1]
+        @end_date = @rule['rule'].split(" ")[2]
+      elsif (@op == DATE_BEFORE) || (@op == DATE_AFTER)
+        @ref_date = @rule['rule'].split(" ")[1]
+      end
     else
       @op = @rule['rule'].split(" ")[1]
+      @ref_value = @rule['rule'].split(" ")[2] # reference value
     end
-    
-    @ref_value = @rule['rule'].split(" ")[2] # reference value
   end
 end

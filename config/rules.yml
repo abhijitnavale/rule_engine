@@ -1,5 +1,4 @@
 ---
-# Example Rules
 ATL1:
   Integer:
     rule: value <= 240
@@ -15,10 +14,15 @@ ATL2:
     # rule: value != 124
 ATL3:
   Datetime:
-    rule: in future
-    # rule: not in future
-    # rule: between d1 d2
-    # rule: before d1
-    # rule: after d3
+    # rule: after 2017-08-20
+    # rule: today
+    # rule: future
+    # rule: _future
+    # rule: past
+    rule: _past
+    # rule: between YYYY-MM-DD YYYY-MM-DD
+    # rule: _between YYYY-MM-DD YYYY-MM-DD
+    # rule: before YYYY-MM-DD
+    # rule: after YYYY-MM-DD
   Integer:
     rule: value > 0
