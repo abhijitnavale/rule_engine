@@ -142,17 +142,21 @@ class Engine
     @value = input_signal['value']
 
     if (data_type == DATETIME_TYPE)
-      @op = @rule['rule'].split(" ")[0]
-
-      if (@op == DATE_BETWEEN_RANGE) || (@op == DATE_NOT_BETWEEN_RANGE)
-        @start_date = @rule['rule'].split(" ")[1]
-        @end_date = @rule['rule'].split(" ")[2]
-      elsif (@op == DATE_BEFORE) || (@op == DATE_AFTER)
-        @ref_date = @rule['rule'].split(" ")[1]
-      end
+      set_common_date_values(@rule)
     else
       @op = @rule['rule'].split(" ")[1]
       @ref_value = @rule['rule'].split(" ")[2] # reference value
+    end
+  end
+
+  def set_common_date_values(rule)
+    @op = rule['rule'].split(" ")[0]
+
+    if (@op == DATE_BETWEEN_RANGE) || (@op == DATE_NOT_BETWEEN_RANGE)
+      @start_date = rule['rule'].split(" ")[1]
+      @end_date = rule['rule'].split(" ")[2]
+    elsif (@op == DATE_BEFORE) || (@op == DATE_AFTER)
+      @ref_date = rule['rule'].split(" ")[1]
     end
   end
 end
