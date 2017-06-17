@@ -20,17 +20,20 @@ SIGNAL:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;rule: <expression>
 
 ## Rule Syntax
-* Integer: **"rule: value op <number>"** where 'value' is keyword, 'op' is operator for integer operation and <number> is any integer or floating number
-* String: **"rule: value op <str>"**, where 'value' is keyword, 'op' is string operator and <str> is String to be compared with.
+* Integer: **"rule: value op number"** where 'value' is keyword, 'op' is operator for integer operation and "number" is any integer or floating number
+* String: **"rule: value op str"**, where 'value' is keyword, 'op' is string operator and "str" is a String to be compared with.
 * DateTime: **"between YYYY-MM-DD YYYY-MM-DD"**, where 'between' is keyword, and remaining both are dates in format YYYY-MM-DD.
 * Use underscore '_' (without quotes) to denote negation for DateTime Type.
+Example: _future means Date Not in Future.
 * Use exclamation '!' (without quotes) to denote negation for Integer and String Types.
 
 ## Rule Examples
 ### INTEGER rule for signal ALT1 is written as follows:
 Rule Explanation in front of it in round bracket.
-Round Bracket is not part of rule.
 
+**Round Bracket is not part of rule.**
+
+```
 ATL1:
   Integer:
     rule: value <= 240 (value should be less than 240)
@@ -39,18 +42,21 @@ ATL1:
     # rule: value > 100 (value shold be greater than 100)
     # rule: value < 100 (value should be less than 100)
     # rule: value != 100 (value should **NOT** be equal to 100)
+```
 
 ### STRING rule for signal ATL2:
-Use ALL CAPS for 'LOW' and 'HIGH'.
 
-ATL2:
+**Use ALL CAPS for 'LOW' and 'HIGH'.**
+
+```ATL2:
   String:
     rule: value != LOW (value should **NOT** equal to 'LOW')
     # rule: value == HIGH (value should be equal to 'HIGH)
     # rule: value != 124 (value should **NOT** be equal to string '124')
+```
 
 ### Multiple DATA TYPE rules for same signal ATL3:
-
+```
 ATL3:
   Datetime:
     # rule: after 2017-08-20 (date should be after 2017-08-20)
@@ -65,3 +71,4 @@ ATL3:
     # rule: after YYYY-MM-DD (date should occure after given date)
   Integer:
     rule: value > 0 (value should be greater than 0)
+```    
