@@ -74,17 +74,3 @@ ATL3:
   Integer:
     rule: value > 0 (value should be greater than 0)
 ```
-
-## Discussion Questions:
-
-* Briefly describe the conceptual approach you chose! What are the trade-offs?
-  * We are reading from json file and then processing input according to rules specified in configuration file. Hence we can not make use of caching feature of Redis like DB store to speed up processing.
-
-* What's the runtime performance? What is the complexity? Where are the bottlenecks?
-  * Runtime Performance is: 0.002832 seconds.
-  * Bottleneck might occur when json file gets large.
-
-* If you had more time, what improvements would you make, and in what order of priority?
-  * Add Tests.
-  * Use Redis for Caching to process large json.
-  * Package it in either Ruby Gem or some other package format.
